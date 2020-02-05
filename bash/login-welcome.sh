@@ -39,8 +39,8 @@ test $testDate = 'Saturday' && title='Papa'
 ###############
 # Main        #
 ###############
-cat <<EOF
 
-Welcome to planet $hostname, "$title $myname!"
 
-EOF
+myvar="Welcome to planet $hostname, $title $myname!"
+
+cowsay $myvar
