@@ -1,8 +1,10 @@
 #!/bin/bash
 # This script demonstrates how the shift command works
-
+echo "Exexuting commands"
 # create an empty array to put the command line arguments into
 myargs=()
+debug="no"
+verbose="no"
 # loop through the command line arguments
 while [ $# -gt 0 ]; do
   # tell the user how many things are left on the command line
@@ -50,9 +52,16 @@ case $1 in
   echo "--------------------------"
   # go back to the top of the loop to see if anything is left to work on
 done
-echo "Done"
+echo "Done, arguments processed"
 
 # TASK2: display the settings and myargs contents
 #         Tell the user if vebose mode is on
 #         Tell the user if debug mode is on and if it is, what number it is set to
 #         Print out the myargs array with a label
+if [ "$debug" = "yes" ]; then
+  echo "Debug is on"
+fi
+if [ "$verbose" = "yes" ]; then
+  echo "Verbose is on"
+fi
+echo "${myargs[@]}"
