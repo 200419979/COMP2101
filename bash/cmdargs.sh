@@ -1,10 +1,10 @@
 #!/bin/bash
 # This script demonstrates how the shift command works
-echo "Exexuting commands"
+echo "Executing commands"
 # create an empty array to put the command line arguments into
 myargs=()
-debug="no"
-verbose="no"
+i=0
+w=0
 # loop through the command line arguments
 while [ $# -gt 0 ]; do
   # tell the user how many things are left on the command line
@@ -22,26 +22,30 @@ while [ $# -gt 0 ]; do
 #             display an error if the user gave the -d option without a single digit number after it
 #          Anything that wasn't recognized on the command line should still go into the myargs array
 case $1 in
-    -h )
+-h )
     echo '"-h" is for help.'
     ;;
-    -v )
-    echo '"-v" is for varbose.'
+-v )
+    echo '"-v" is for verbose.'
+    i=1
     ;;
-    -d )
+-d )
+    echo '"-d" is for debug'
     case "$2" in
-    [1-5] )
+     [1-5] )
       echo "Added -d to debug level $2."
+      w=$2
       shift
       ;;
-      *)
-      echo "The -d option must be followed with a number [1-5]. "
-      shift
-    esac
-    ;;
     *)
+      echo "The -d option must be between the numbers [1-5]. "
+      shift
+      esac
+      ;;
+  *)
     errors=$1
     echo "Error $errors"
+    shift
     ;;
   esac
   # each time through the loop, shift the arguments left
@@ -58,10 +62,13 @@ echo "Done, arguments processed"
 #         Tell the user if vebose mode is on
 #         Tell the user if debug mode is on and if it is, what number it is set to
 #         Print out the myargs array with a label
-if [ "$debug" = "yes" ]; then
-  echo "Debug is on"
+if [ $i = 1 ]; then
+  echo "Verbose mode is On."
+else
+  echo "Verbose mode is Off."
 fi
-if [ "$verbose" = "yes" ]; then
-  echo "Verbose is on"
+if [ $w -gt 0 ]; then
+  echo "Debug Mode is On with level $w."
+else
+  echo "Debug Mode is Off."
 fi
-echo "${myargs[@]}"
