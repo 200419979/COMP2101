@@ -30,14 +30,14 @@ case $1 in
     i=1
     ;;
 -d )
-    echo '"-d" is for debug'
-    case "$2" in
-     [1-5] )
-      echo "Added -d to debug level $2."
-      w=$2
-      shift
-      ;;
-    *)
+   	w=1
+   	case "$2" in
+   	 [1-5] )
+   	  		echo "Debug mode is ON."
+   	  		echo "You added \"-d\" for debug level $2."
+   	  		shift
+   	  		;;
+   	  		*)
       echo "The -d option must be between the numbers [1-5]. "
       shift
       esac
@@ -68,7 +68,7 @@ else
   echo "Verbose mode is Off."
 fi
 if [ $w -gt 0 ]; then
-  echo "Debug Mode is On with level $w."
+  echo "Debug Mode is On"
 else
   echo "Debug Mode is Off."
 fi
