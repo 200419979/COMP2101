@@ -65,10 +65,7 @@ interfaces=$(ifconfig | grep -w -o '^[^ ][^ ]*:' | tr -d :)
 for interface in $interfaces; do
 # Find an address and hostname for the interface being summarized
 # we are assuming there is only one IPV4 address assigned to this interface
-if [ $interface == "lo" ]
-   then
-     continue
-   fi
+
 ipv4_address=$(ip a s $interface|awk -F '[/ ]+' '/inet /{print $3}')
 ipv4_hostname=$(getent hosts $ipv4_address | awk '{print $2}')
 
